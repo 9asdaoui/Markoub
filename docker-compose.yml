@@ -1,0 +1,50 @@
+services:
+    laravel.test:
+        build:
+            context: ./vendor/laravel/sail/runtimes/8.4
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        image: sail-8.4/app
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        ports:
+            - 8008:80
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - sail
+        depends_on:
+            - mysql
+    mysql:
+        image: mysql
+        ports:
+            - 3307:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: markoub
+            MYSQL_USER: user
+            MYSQL_PASSWORD: root
+        volumes:
+                - mysql_data:/var/lib/mysql
+        networks:
+            - sail
+    phpmyadmin:
+        image: 'phpmyadmin/phpmyadmin'
+        ports:
+            - 8080:80
+        environment:
+            PMA_ARBITRARY: 1
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+        depends_on:
+            - mysql
+        networks:
+            - sail
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        restart: always
+networks:
+    sail:
+        driver: bridge
+volumes:
+    mysql_data:
