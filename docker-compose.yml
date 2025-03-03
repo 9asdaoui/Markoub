@@ -35,14 +35,20 @@ services:
             - 8080:80
         environment:
             PMA_ARBITRARY: 1
-            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ROOT_PASSWORD: root
         depends_on:
             - mysql
         networks:
             - sail
         extra_hosts:
             - 'host.docker.internal:host-gateway'
-        restart: always
+        restart: always 
+    node:
+        image: 'node:16-alpine'
+        user: '${WWWUSER:-1000}:${WWWGROUP:-1000}'
+        working_dir: /var/www/html
+        volumes:
+            - '.:/var/www/html' 
 networks:
     sail:
         driver: bridge
