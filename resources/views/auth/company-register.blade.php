@@ -36,11 +36,11 @@
                             </div>
                             
                             <p class="text-muted mb-4">Fill in your company details to join our platform</p>
-                            
-                            <form method="POST" action="{{ route('company.register') }}" class="needs-validation" novalidate>
+                            <form method="POST" action="{{ route('register') }}?type=company" class="needs-validation" novalidate>
                                 @csrf
 
                                 <div class="row g-3">
+                                    <!-- User Information -->
                                     <div class="col-md-6 mb-3">
                                         <label for="name" class="form-label">{{ __('Company Name') }} <span class="text-danger">*</span></label>
                                         <div class="input-group">
@@ -66,26 +66,66 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    
+
+                                    <!-- Company Information -->
                                     <div class="col-md-6 mb-3">
-                                        <label for="phone" class="form-label">{{ __('Phone Number') }} <span class="text-danger">*</span></label>
+                                        <label for="address" class="form-label">{{ __('Address') }}</label>
                                         <div class="input-group">
-                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                            <input id="phone" type="tel" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="tel" placeholder="+1234567890">
-                                            @error('phone')
+                                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                            <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" autocomplete="address" placeholder="123 Business St">
+                                            @error('address')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-6 mb-3">
-                                        <label for="address" class="form-label">{{ __('Company Address') }}</label>
+                                        <label for="city" class="form-label">{{ __('City') }}</label>
                                         <div class="input-group">
-                                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
-                                            <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" autocomplete="address" placeholder="Company address">
-                                            @error('address')
+                                            <span class="input-group-text"><i class="fas fa-city"></i></span>
+                                            <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" autocomplete="city" placeholder="Your city">
+                                            @error('city')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="country" class="form-label">{{ __('Country') }}</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-globe"></i></span>
+                                            <input id="country" type="text" class="form-control @error('country') is-invalid @enderror" name="country" value="{{ old('country') }}" autocomplete="country" placeholder="Your country">
+                                            @error('country')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="postal_code" class="form-label">{{ __('Postal Code') }}</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-map-pin"></i></span>
+                                            <input id="postal_code" type="text" class="form-control @error('postal_code') is-invalid @enderror" name="postal_code" value="{{ old('postal_code') }}" autocomplete="postal-code" placeholder="12345">
+                                            @error('postal_code')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="website" class="form-label">{{ __('Website') }}</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-globe"></i></span>
+                                            <input id="website" type="url" class="form-control @error('website') is-invalid @enderror" name="website" value="{{ old('website') }}" autocomplete="url" placeholder="https://www.example.com">
+                                            @error('website')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -132,6 +172,7 @@
                                     <p class="text-muted">Already have an account? <a href="{{ route('login.form') }}" class="text-primary fw-bold">Login here</a></p>
                                 </div>
                             </form>
+                            
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NavetteController;
 use Illuminate\Support\Facades\Route;
 
 // Main landing page route
@@ -33,3 +34,17 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 // Log the user out of the application
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Home page for client users (role_id = 1)
+Route::get('/navettes/home',[NavetteController::class, 'index'] );
+
+// Route for searching navettes
+Route::get('/navettes/search', [NavetteController::class, 'search'])->name('navettes.search');
+
+// Route for displaying a specific navette
+Route::get('/navettes/{navette}', [NavetteController::class, 'show'])->name('navettes.show');
+
+
+
+// Dashboard for company users (role_id = 2)
+Route::get('/company/dashboard',[NavetteController::class, 'index'] );

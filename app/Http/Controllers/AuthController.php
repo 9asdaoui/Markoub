@@ -40,18 +40,26 @@ class AuthController extends Controller
         ]);
 
         if ($role_id === 2) {
-            $userId = $user->id;
+            $companyData = $request->validate([
+            'address' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:100',
+            'country' => 'nullable|string|max:100',
+            'postal_code' => 'nullable|string|max:20',
+            'website' => 'nullable|url|max:255',
+            ]);
+            
             $user->company()->create([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'phone' => $request->input('phone', ''),
-            'user_id' => $userId
+                'user_id' => $user->id,
+                'address' => $companyData['address'] ?? null,
+                'city' => $companyData['city'] ?? null,
+                'country' => $companyData['country'] ?? null,
+                'postal_code' => $companyData['postal_code'] ?? null,
+                'website' => $companyData['website'] ?? null
             ]);
         }
         
         auth()->login($user);
-
-        return redirect('/dashboard');
+        return redirect('/');
     }    
     
     public function showLoginForm()
@@ -68,8 +76,11 @@ class AuthController extends Controller
 
         if (auth()->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect('/dashboard');
-        }
+            if (auth()->user()->role_id === 2) {
+                return redirect('/company/dashboard');
+            } else if (auth()->user()->role_id === 1) {
+                return redirect('/client/home');
+            }        }
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
