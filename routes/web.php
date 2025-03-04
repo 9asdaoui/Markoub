@@ -45,6 +45,5 @@ Route::get('/navettes/search', [NavetteController::class, 'search'])->name('nave
 Route::get('/navettes/{navette}', [NavetteController::class, 'show'])->name('navettes.show');
 
 
-
 // Dashboard for company users (role_id = 2)
 Route::get('/company/dashboard',[NavetteController::class, 'index'] );

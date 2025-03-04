@@ -17,18 +17,15 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
+        //     'name' => 'Oussama',
         //     'email' => 'test@example.com',
         // ]);
-        // $this->call([
-        //     RoleS::class,
-        //     // Add other seeders here
-        // ]);
+        $this->call([
+            RoleS::class,
+            // NavetteSeeder::class,
+        ]);
         
 
 
-        $this->call([    
-            NavetteSeeder::class,
-        ]);
     }
 }

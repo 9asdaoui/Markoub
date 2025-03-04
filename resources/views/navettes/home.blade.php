@@ -112,7 +112,7 @@
                                     {{ $navette->seats_total - $navette->seats_booked }} seats available
                                 </p>
                             </div>
-                            <a href="" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
+                            <a href="{{ route('navettes.show', $navette->id) }}" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
                                 View Details
                             </a>
                         </div>

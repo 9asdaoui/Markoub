@@ -53,7 +53,20 @@ class NavetteController extends Controller
      */
     public function show(Navette $navette)
     {
-        //
+        // Load navette with related company information
+        $navette->load('company');
+
+        // Get similar navettes (same route, future dates)
+        $similarNavettes = Navette::with('company')
+            ->where('departure_city', $navette->departure_city)
+            ->where('arrival_city', $navette->arrival_city)
+            ->where('id', '!=', $navette->id)
+            ->where('departure_time', '>=', now()->toDateString())
+            ->orderBy('departure_time')
+            ->limit(5)
+            ->get();
+
+        return view('navettes.show', compact('navette', 'similarNavettes'));
     }
 
     /**
