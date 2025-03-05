@@ -59,7 +59,12 @@ class AuthController extends Controller
         }
         
         auth()->login($user);
-        return redirect('/');
+
+        if (auth()->user()->role_id === 2) {
+            return redirect('/company/dashboard');
+        } else if (auth()->user()->role_id === 1) {
+            return redirect('/client/home');
+        }     
     }    
     
     public function showLoginForm()
@@ -75,12 +80,17 @@ class AuthController extends Controller
         ]);
 
         if (auth()->attempt($credentials)) {
+
             $request->session()->regenerate();
-            if (auth()->user()->role_id === 2) {
+
+            if (auth()->user()->role_id === 3) {
                 return redirect('/company/dashboard');
+            } else if (auth()->user()->role_id === 2) {
+                return redirect('/navettes/home');
             } else if (auth()->user()->role_id === 1) {
-                return redirect('/client/home');
-            }        }
+                return redirect('/admin/dashboard');   
+            }    
+        }
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',

@@ -12,18 +12,29 @@ class CompanySeeder extends Seeder
      */
     public function run(): void
     { 
-        \App\Models\Company::create([
-            'name' => 'Acme Corporation',
-            'email' => 'info@acme.com',
-            'address' => '123 Main St',
-            'phone' => '555-1234',
-        ]);
+        // Get some user IDs to associate with companies
+        $userIds = \App\Models\User::pluck('id')->toArray();
         
-        \App\Models\Company::create([
-            'name' => 'Globex Industries',
-            'email' => 'contact@globex.com',
-            'address' => '456 Oak Ave',
-            'phone' => '555-5678',
-        ]);
+        if (count($userIds) > 0) {
+            \App\Models\Company::create([
+            'user_id' => $userIds[0],
+            'address' => '123 Main St',
+            'city' => 'New York',
+            'country' => 'USA',
+            'postal_code' => '10001',
+            'website' => 'https://acmecorp.com',
+            ]);
+            
+            if (count($userIds) > 1) {
+            \App\Models\Company::create([
+                'user_id' => $userIds[1],
+                'address' => '456 Oak Ave',
+                'city' => 'San Francisco',
+                'country' => 'USA',
+                'postal_code' => '94103',
+                'website' => 'https://globexindustries.com',
+            ]);
+            }
+        }
     }
 }

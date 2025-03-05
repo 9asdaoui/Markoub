@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Navette;
+use App\Models\Permission;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,8 +22,12 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([
-            RoleS::class,
-            // NavetteSeeder::class,
+            // RoleS::class,
+            tagSeeder::class,
+            // UserSeeder::class,
+            // CompanySeeder::class,
+            // PermissionSeeder::class,
+            // RolePermissionSeeder::class,
         ]);
         
 
