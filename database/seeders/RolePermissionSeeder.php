@@ -14,7 +14,9 @@ class RolePermissionSeeder extends Seeder
     {
         // Get all roles
         $adminRole = \App\Models\Role::where('name', 'admin')->first();
+
         $clientRole = \App\Models\Role::where('name', 'client')->first();
+
         $companyRole = \App\Models\Role::where('name', 'company')->first();
 
         // Clear existing role_permission relationships to avoid duplicates
@@ -68,7 +70,7 @@ class RolePermissionSeeder extends Seeder
             ->pluck('id');
             
         foreach ($companyPermissionIds as $permissionId) {
-            DB::table('role_permissions')->insert([
+            DB::table('role_permission')->insert([
                 'role_id' => $companyRole->id,
                 'permission_id' => $permissionId,
             ]);

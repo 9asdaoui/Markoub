@@ -52,7 +52,7 @@ Route::get('/navettes/{navette}', [NavetteController::class, 'show'])->name('nav
 
 
 // Admin dashboard
-Route::get('/admin/dashboard', [StatisticController::class, 'index'])->name('/admin/dashboard');
+Route::get('/admin/dashboard', [StatisticController::class, 'index'])->name('dashboard');
 
 Route::get('/admin/roles/index', [RoleController::class, 'index'])->name('roles.index');
 

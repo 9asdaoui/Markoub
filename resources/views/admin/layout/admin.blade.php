@@ -18,6 +18,12 @@
             <nav class="mt-6">
                 <ul>
                     <li class="px-4 py-2 hover:bg-gray-700">
+                        <a href="{{ route('dashboard') }}" class="flex items-center">
+                            <i class="fas fa-users mr-3"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>                    
+                    <li class="px-4 py-2 hover:bg-gray-700">
                         <a href="" class="flex items-center">
                             <i class="fas fa-users mr-3"></i>
                             <span>Users</span>

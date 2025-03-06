@@ -14,6 +14,10 @@
                     <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
             </div>
+
+            <div>
+                
+            </div>
             
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2">Permissions:</label>
