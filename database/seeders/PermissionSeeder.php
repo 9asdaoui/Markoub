@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Permission as ModelsPermission;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
+use App\Models\Permission;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 
 class PermissionSeeder extends Seeder
 {
@@ -14,33 +16,23 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
-            // Create permissions based on routes
-            $permissions = [
-                // General permissions
-                'view_welcome',
-                
-                // Auth permissions
-                'register_client',
-                'register_company',
-                'register_general',
-                'login',
-                'logout',
-                
-                // Navette permissions for clients
-                'view_navettes',
-                'search_navettes',
-                'view_navette_details',
-                
-                // Company dashboard permissions
-                'access_company_dashboard',
-            ];
-            // Create permissions manually using DB
-            foreach ($permissions as $permission) {
-                DB::table('permissions')->insert([
-                    'name' => $permission,
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ]);
+
+        $excludedRoutes = ['sanctum.csrf-cookie', 'ignition.healthCheck', 'ignition.executeSolution', 'ignition.updateConfig', 'client.register', 'company.register', 'register','login.form','login','logout'];
+
+        $routes = collect(Route::getRoutes())->filter(function ($route) use ($excludedRoutes) {
+            return $route->getName() && !in_array($route->getName(), $excludedRoutes);
+        });        
+        
+        $permissions = [];
+        
+        foreach ($routes as $route) {
+            if ($name = $route->getName()) {
+                $permissions[] = ['name' => $name];
             }
         }
+        
+        foreach ($permissions as $perm) {
+            Permission::firstOrCreate($perm);
+        }
+    }
 }

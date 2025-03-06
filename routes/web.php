@@ -60,7 +60,7 @@ Route::get('/admin/roles/create', [RoleController::class, 'create'])->name('role
 Route::post('/admin/roles/store', [RoleController::class, 'store'])->name('roles.store');
 
 Route::get('/admin/roles/edit/{role}', [RoleController::class, 'edit'])->name('roles.edit');
-Route::put('/admin/roles/update', [RoleController::class, 'update'])->name('roles.update');
+Route::put('/admin/roles/update/{role}', [RoleController::class, 'update'])->name('roles.update');
 
 
 Route::delete('/admin/roles/destroy{role}', [RoleController::class, 'destroy'])->name('roles.destroy');
