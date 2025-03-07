@@ -24,7 +24,7 @@
                         </a>
                     </li>                    
                     <li class="px-4 py-2 hover:bg-gray-700">
-                        <a href="" class="flex items-center">
+                        <a href="{{ route('users.index') }}" class="flex items-center">
                             <i class="fas fa-users mr-3"></i>
                             <span>Users</span>
                         </a>

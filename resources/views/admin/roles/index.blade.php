@@ -45,10 +45,10 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm">
                                 <div class="flex space-x-2">
-                                    <a href="{{ route('roles.edit', $role->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-md">
+                                    <a href="{{ route('roles.edit', $role) }}" class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-md">
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
-                                    <form action="{{ route('roles.destroy', $role->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this role?')">
+                                    <form action="{{ route('roles.destroy', $role) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this role?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-md">
